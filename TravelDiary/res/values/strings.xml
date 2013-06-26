@@ -5,5 +5,14 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="button">GO</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="no_diaries">Currently there are no diaries items maintained</string>
+    <string name="menu_insert">Add Item</string>
+    <string name="menu_delete">Delete Diary</string>
+    <string name="diary_summary">Summary</string>
+    <string name="diary_description">Delete Todo</string>
+    <string name="diary_edit_summary">Summary</string>
+    <string name="diary_edit_description">Description</string>
+    <string name="diary_edit_confirm">Confirm</string>
 
 </resources>
