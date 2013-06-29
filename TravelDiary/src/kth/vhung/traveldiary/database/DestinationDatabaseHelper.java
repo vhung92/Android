@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DestinationDatabaseHelper extends SQLiteOpenHelper {
 
-  private static final String DATABASE_NAME = "todotable.db";
+  private static final String DATABASE_NAME = "destination.db";
   private static final int DATABASE_VERSION = 1;
 
   public DestinationDatabaseHelper(Context context) {
@@ -16,15 +16,14 @@ public class DestinationDatabaseHelper extends SQLiteOpenHelper {
   // Method is called during creation of the database
   @Override
   public void onCreate(SQLiteDatabase database) {
-    DestinationTable.onCreate(database);
+    DestinationTableContract.onCreate(database);
   }
 
   // Method is called during an upgrade of the database,
   // e.g. if you increase the database version
   @Override
-  public void onUpgrade(SQLiteDatabase database, int oldVersion,
-      int newVersion) {
-    DestinationTable.onUpgrade(database, oldVersion, newVersion);
+  public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
+	  DestinationTableContract.onUpgrade(database, oldVersion, newVersion);
   }
 }
  

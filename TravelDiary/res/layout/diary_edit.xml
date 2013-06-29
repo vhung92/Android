@@ -7,8 +7,7 @@
     <Spinner
         android:id="@+id/category"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:entries="@array/priorities" >
+        android:layout_height="wrap_content" >
     </Spinner>
 
     <LinearLayout
@@ -21,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/todo_edit_summary"
+            android:hint="@string/diary_edit_summary"
             android:imeOptions="actionNext" >
         </EditText>
     </LinearLayout>

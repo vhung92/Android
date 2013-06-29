@@ -1,9 +1,10 @@
 package kth.vhung.traveldiary.contentprovider;
 
-
 import java.util.Arrays;
 import java.util.HashSet;
 
+import kth.vhung.traveldiary.database.DestinationDatabaseHelper;
+import kth.vhung.traveldiary.database.DestinationTableContract.DestinationTable;
 import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -13,8 +14,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
-import kth.vhung.traveldiary.database.DestinationDatabaseHelper;
-import kth.vhung.traveldiary.database.DestinationTable;
 
 public class MyContentProvider extends ContentProvider {
 
@@ -59,7 +58,7 @@ public class MyContentProvider extends ContentProvider {
     checkColumns(projection);
 
     // Set the table
-    queryBuilder.setTables(DestinationTable.TABLE_DESTINATION);
+    queryBuilder.setTables(DestinationTable.TABLE_NAME);
 
     int uriType = sURIMatcher.match(uri);
     switch (uriType) {
@@ -92,11 +91,10 @@ public class MyContentProvider extends ContentProvider {
   public Uri insert(Uri uri, ContentValues values) {
     int uriType = sURIMatcher.match(uri);
     SQLiteDatabase sqlDB = database.getWritableDatabase();
-    int rowsDeleted = 0;
     long id = 0;
     switch (uriType) {
     case TODOS:
-      id = sqlDB.insert(DestinationTable.TABLE_DESTINATION, null, values);
+      id = sqlDB.insert(DestinationTable.TABLE_NAME, null, values);
       break;
     default:
       throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -112,17 +110,17 @@ public class MyContentProvider extends ContentProvider {
     int rowsDeleted = 0;
     switch (uriType) {
     case TODOS:
-      rowsDeleted = sqlDB.delete(DestinationTable.TABLE_DESTINATION, selection,
+      rowsDeleted = sqlDB.delete(DestinationTable.TABLE_NAME, selection,
           selectionArgs);
       break;
     case TODO_ID:
       String id = uri.getLastPathSegment();
       if (TextUtils.isEmpty(selection)) {
-        rowsDeleted = sqlDB.delete(DestinationTable.TABLE_DESTINATION,
+        rowsDeleted = sqlDB.delete(DestinationTable.TABLE_NAME,
             DestinationTable.COLUMN_ID + "=" + id, 
             null);
       } else {
-        rowsDeleted = sqlDB.delete(DestinationTable.TABLE_DESTINATION,
+        rowsDeleted = sqlDB.delete(DestinationTable.TABLE_NAME,
             DestinationTable.COLUMN_ID + "=" + id 
             + " and " + selection,
             selectionArgs);
@@ -144,7 +142,7 @@ public class MyContentProvider extends ContentProvider {
     int rowsUpdated = 0;
     switch (uriType) {
     case TODOS:
-      rowsUpdated = sqlDB.update(DestinationTable.TABLE_DESTINATION, 
+      rowsUpdated = sqlDB.update(DestinationTable.TABLE_NAME, 
           values, 
           selection,
           selectionArgs);
@@ -152,12 +150,12 @@ public class MyContentProvider extends ContentProvider {
     case TODO_ID:
       String id = uri.getLastPathSegment();
       if (TextUtils.isEmpty(selection)) {
-        rowsUpdated = sqlDB.update(DestinationTable.TABLE_DESTINATION, 
+        rowsUpdated = sqlDB.update(DestinationTable.TABLE_NAME, 
             values,
             DestinationTable.COLUMN_ID + "=" + id, 
             null);
       } else {
-        rowsUpdated = sqlDB.update(DestinationTable.TABLE_DESTINATION, 
+        rowsUpdated = sqlDB.update(DestinationTable.TABLE_NAME, 
             values,
             DestinationTable.COLUMN_ID + "=" + id 
             + " and " 
@@ -173,8 +171,7 @@ public class MyContentProvider extends ContentProvider {
   }
 
   private void checkColumns(String[] projection) {
-    String[] available = { DestinationTable.COLUMN_CATEGORY,
-        DestinationTable.COLUMN_SUMMARY, DestinationTable.COLUMN_DESCRIPTION,
+    String[] available = {DestinationTable.COLUMN_DESCRIPTION,
         DestinationTable.COLUMN_ID };
     if (projection != null) {
       HashSet<String> requestedColumns = new HashSet<String>(Arrays.asList(projection));
