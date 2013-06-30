@@ -29,17 +29,17 @@ private SQLiteDatabase database;
         super.onCreate(savedInstanceState);
 
         // We need to use a different list item layout for devices older than Honeycomb
-        int layout = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ?
-                android.R.layout.simple_list_item_activated_1 : android.R.layout.simple_list_item_1;
+        //int layout = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ?
+        //        android.R.layout.simple_list_item_activated_1 : android.R.layout.simple_list_item_1;
 
         Context myContext = getActivity();
         DestinationDatabaseHelper db = new DestinationDatabaseHelper(myContext);
         database = db.getReadableDatabase();
-        String[] projection = {DestinationTable.COLUMN_DESCRIPTION};
+        String[] projection = {DestinationTable.COLUMN_DESCRIPTION, DestinationTable.COLUMN_ID};
         Cursor c = database.query(DestinationTable.TABLE_NAME, projection, null, null, null, null, null);
         
         int[] to = new int[] {R.id.description};
-        SimpleCursorAdapter da = new SimpleCursorAdapter(myContext, layout, c, projection, to, 0);
+        SimpleCursorAdapter da = new SimpleCursorAdapter(myContext, R.layout.listfragment_layout, c, projection, to, 0);
         setListAdapter(da);
     }
 

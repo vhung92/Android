@@ -1,6 +1,5 @@
 package kth.vhung.traveldiary;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -9,8 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 
 public class MainActivity extends FragmentActivity implements 
 	MyListFragment.OnHeadlineSelectedListener{
-	
-	private SQLiteDatabase database;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
