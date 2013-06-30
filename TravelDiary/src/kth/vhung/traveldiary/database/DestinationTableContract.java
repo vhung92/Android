@@ -18,6 +18,7 @@ public final class DestinationTableContract {
 
 	public static void onCreate(SQLiteDatabase database) {
 		database.execSQL(CREATE_DATABASE);
+		database.execSQL("INSERT INTO destination (description) VALUES ('Trip to Japan')");
 	}
 
 	public static void onUpgrade(SQLiteDatabase database, int oldVersion,
