@@ -1,3 +1,7 @@
+/*
+* @author Victor Hung
+*/
+
 package kth.vhung.soundbox;
 
 public class GridElement {
